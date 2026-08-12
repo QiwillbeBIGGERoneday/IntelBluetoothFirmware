@@ -100,10 +100,13 @@ void IntelBluetoothFirmware::publishReg(bool isSucceed, const char *fwName)
     m_pDevice->setProperty("FirmwareLoaded", isSucceed);
     if (isSucceed)
         setProperty("fw_name", OSString::withCString(fwName));
-    // Monterey+
+           // Monterey+
     if (version_major >= 21)
+    {
         m_pDevice->setName("Bluetooth USB Host Controller");
-}
+    }
+    m_pDevice->setProperty("USB Product Name", "Bluetooth USB Host Controller");
+    m_pDevice->setProperty("USB Vendor Name", "Intel Corporation");
 
 void IntelBluetoothFirmware::cleanUp()
 {
